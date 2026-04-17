@@ -6,6 +6,10 @@
 </head>
 <body>
     
+<p>Crea una pàgina amb un formulari que demani: Nom, Ciutat
+El formulari s’ha d’enviar amb GET i el mateix script ha de mostrar:
+Hola [nom], vius a [ciutat].
+</p>
 
 <h2>Formulari</h2>
 
