@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script></head>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;700&family=Merriweather&display=swap" rel="stylesheet"> 
+    
+<style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+    img {margin:0px;}
+          @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+    h1 {
+      font-family: 'Berkshire Swash';
+      font-size: 40pt;
+      text-align:center;
+      padding:8px;
+    }
+
+    titol2 {
+        font-family: font-family: 'Merriweather', serif;
+        font-size: 14pt;
+        text-align:center;
+        padding:8px;
+    }
+
+    p,form-check-label {
+      font-family: font-family: 'Merriweather', serif;
+      font-size: 14pt;
+      text-align:center;
+      
+      padding:8px;
+    }
+
+    @media screen and (max-width:420px){
+        .titol {
+            text-shadow:0px 0px 0 #444;
+            font-size: 15pt;
+        }
+        .titol2 {
+            text-shadow:0px 0px 0 #444;
+            font-size: 10pt;
+
+        }
+        
+    .w3-display-topmiddle {
+        left:0%;
+        transform: translate(0%,0%);
+        padding-top:50px;
+        padding-left:15px;
+        padding-right:15px;
+        
+        }
+
+}
+</style>   
+    
+    
+<body class="container-fluid">
+    <div class="w3-container w3-center">
+        <h1 class="titol">Objectes historics de Gimnèsia</h1>
+        <h2>Thomas Montilla A.</h2>
+    </div>
+    <div class="row w3-container">
+        <div class="w3-col l4">
+        </div>
+        
+        <button class="btn btn-primary btn-block w3-col l4" id="inicia">Juga a endevinar i puntuar</button>
+        <div class="w3-col l4">
+        </div>
+        
+    
+    
+    
+    </div>
+  </div>
+  <p id="puntuacio"></p>
+
+<div class="row w3-container">
+    <div class="w3-col l4">
+
+    </div>
+    <div class="w3-col l4 s12">      
+        <img id="img1" class="img-fluid max-width" src="">
+    </div>
+    <div class="w3-col l4">
+
+    </div>
+    <div class="w3-col l4">
+    </div>
+    <br>
+    <br>
+    <div class="w3-col l4 s12" id="botons">
+        <button id="boto0" class="btn btn-primary btn-block titol2" onclick="pitjat(0)"></button>
+        <button id="boto1" class="btn btn-primary btn-block titol2" onclick="pitjat(1)"> </button>
+        <button id="boto2" class="btn btn-primary btn-block titol2" onclick="pitjat(2)"></button>
+        <button id="boto3" class="btn btn-primary btn-block titol2" onclick="pitjat(3)"></button>
+    </div>
+    <div class="w3-col l4">
+
+    </div>
+</div>
+    
+</div>
+    
+  
+
+</body>
+<script>
+
+var especies =[];
+var aleatoris=[];
+var correcte;
+var punts;
+var nombre=4;
+var maxim =60;
+var tipusJoc=0;
+var codiPartida;
+
+console.log("Benvinguts a l'aplicació");
+$("#inicia").click();
+
+$(document).ready(function(){
+  $(".form-check-input").click(function(){
+      if($("#radio1").is(':checked')){tipusJoc=0;}
+      if($("#radio2").is(':checked')){tipusJoc=1;}
+      if($("#radio3").is(':checked')){tipusJoc=2;}
+      if($("#radio4").is(':checked')){tipusJoc=3;}
+      //console.log("form-checkimput")
+      posaBotons();
+  });
+  
+  $("#inicia").click(function(){
+    $.get("http://www.gimnesia.net/api/especie/read.php",
+    {},
+    function(data,status){
+        especies = {
+  "records": [
+    {"codi":"1","nom":"CRANI DE MYOTRAGUS","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Els homes prehistòrics trobaren a les illes un curiós animal que els científics han anomenat Myotragus (\"cabra-rata\" en grec)."},
+    {"codi":"2","nom":"CERÀMICA NEOLÍTICA DE SON MATGE","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"La ceràmica va ser una vertadera revolució per a l'home prehistòric."},
+    {"codi":"3","nom":"GRAVATS DE LA COVA DE BETLEM","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Misteriosos gravats considerats possiblement l'art més antic de les Balears."},
+    {"codi":"4","nom":"CERÀMICA CAMPANIFORME","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Ceràmica decorada en forma de campana de l'edat del coure."},
+    {"codi":"5","nom":"SEPULCRE MEGALÍTIC","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Primeres construccions funeràries amb objectes personals."},
+    {"codi":"6","nom":"PUNYAL DE COURE","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Arma domèstica de la societat prehistòrica."},
+    {"codi":"7","nom":"DAMA DE SON MATGE","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Primera representació humana de les Balears."},
+    {"codi":"8","nom":"GANIVETS DE SÍLEX","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Eines de tall fetes amb sílex."},
+    {"codi":"9","nom":"OLLA GLOBULAR","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Recipients funeraris de l'edat del bronze."},
+    {"codi":"10","nom":"CANELLERA D'ARQUER","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Protecció per al canell en el tir amb arc."},
+
+    {"codi":"11","nom":"CLOSQUES PERFORADES","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Objectes decoratius i màgics utilitzats com collars."},
+    {"codi":"12","nom":"DESTRALS DE BRONZE","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Objectes de bronze amagats com tresors."},
+    {"codi":"13","nom":"TORO DE COSTITX","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Figura simbòlica de força i fecunditat."},
+    {"codi":"14","nom":"PECTORAL DE BRONZE","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Objecte que simbolitza autoritat."},
+    {"codi":"15","nom":"PROJECTILS DE FONA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Armes dels guerrers talaiòtics."},
+    {"codi":"16","nom":"MOLÍ DE MÀ","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Eina per moldre gra."},
+    {"codi":"17","nom":"TINTINABUL","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Instrument musical ritual."},
+    {"codi":"18","nom":"COPA CRESTADA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Ceràmica d'ús religiós."},
+    {"codi":"19","nom":"TORO DE SON MAS","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Figura talaiòtica de toro."},
+    {"codi":"20","nom":"TORO DE TORRALBA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Figura votiva de toro."},
+
+    {"codi":"21","nom":"GUERRER DE SON CARRIÓ","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Figura de guerrer talaiòtic."},
+    {"codi":"22","nom":"GUERRER DE SON GELABERT","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Influència grega en l'art."},
+    {"codi":"23","nom":"HARPIA DE BRONZE","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Figura mitològica dona-ocell."},
+    {"codi":"24","nom":"IMHOTEP","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Semidéu egipci venerat."},
+    {"codi":"25","nom":"CERÀMICA FENÍCIA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Ceràmica dels fenicis a Eivissa."},
+    {"codi":"26","nom":"PLACA AMB ESFINX","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Influència egípcia en l'art."},
+    {"codi":"27","nom":"DÉU BES","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Divinitat protectora egípcia."},
+    {"codi":"28","nom":"ESCARABEU","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Amulet egipci protector."},
+    {"codi":"29","nom":"FIGURES ILLA PLANA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Estatuetes religioses púniques."},
+    {"codi":"30","nom":"DAMA D’EIVISSA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Figura púnica decorada."},
+
+    {"codi":"31","nom":"FIGURES DES CUERAM","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Figures de la deessa Tanit."},
+    {"codi":"32","nom":"OU D'ESTRUÇ PINTAT","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Objecte funerari simbòlic."},
+    {"codi":"33","nom":"FULLA D'AFAITAR","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Ritual de pas a l'edat adulta."},
+    {"codi":"34","nom":"MÀSCARA DE TERRACOTA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Protecció contra mals esperits."},
+    {"codi":"35","nom":"BUST D'ESTIL RODI","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Busts de gran bellesa."},
+    {"codi":"36","nom":"BUST DE TANIT","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Famosa figura púnica."},
+    {"codi":"37","nom":"EMPERADOR TIBERI","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Bust romà trobat a Maó."},
+    {"codi":"38","nom":"JÚPITER","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Pare dels déus romans."},
+    {"codi":"39","nom":"MINERVA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Deessa del coneixement."},
+    {"codi":"40","nom":"MONEDA ROMANA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Comerç mediterrani."},
+
+    {"codi":"41","nom":"ESTÀTUA ROMANA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Escultura romana."},
+    {"codi":"42","nom":"ATLETA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Importància dels esports."},
+    {"codi":"43","nom":"NIKÉ D'OR","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Joia de luxe romana."},
+    {"codi":"44","nom":"AGULLES DE MARFIL","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Accessoris de pentinat."},
+    {"codi":"45","nom":"TERRA SIGILLATA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Ceràmica romana típica."},
+    {"codi":"46","nom":"TINTER","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Objecte d'escriptura."},
+    {"codi":"47","nom":"CAP DE NINA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Figura de bronze."},
+    {"codi":"48","nom":"FIGURA D'ESCLAU","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Representació d'esclavitud."},
+    {"codi":"49","nom":"MOSAIC","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Decoració paleocristiana."},
+    {"codi":"50","nom":"LAUDA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Inscripció funerària."},
+
+    {"codi":"51","nom":"CREU","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Ornament religiós."},
+    {"codi":"52","nom":"CAPITELL","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Element arquitectònic."},
+    {"codi":"53","nom":"ENCENSER","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Objecte religiós amb inscripció grega."},
+    {"codi":"54","nom":"CAPITELL BIZANTÍ","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Peça bizantina."},
+    {"codi":"55","nom":"LLÀNTIA AFRICANA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Ceràmica africana."},
+    {"codi":"56","nom":"LLEÓ DE L'ALMUDAINA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Escultura musulmana."},
+    {"codi":"57","nom":"LÀPIDA","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Inscripció funerària musulmana."},
+    {"codi":"58","nom":"TRESOR ALMOHADE","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Joies musulmanes."},
+    {"codi":"59","nom":"FOGÓ","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Objecte domèstic."},
+    {"codi":"60","nom":"DINAR ALMORÀVIT","cientific":"","nivell":"1","insistencia":"0","resistencia":"1","color":"Fons/Fons-blau.tif","h1":"no.gif","h2":"no.gif","h3":"no.gif","imatge":"","poema":"","info":"Moneda musulmana d'or."}
+  ]
+}
+        //JSON.parse(JSON.stringify(data));
+        punts='🔥';
+        //console.log("Carregat:" + JSON.stringify(especies));
+        //creaPartida();
+        
+        //mostrarResultats();
+        volta();
+
+        //document.getElementById("nom").innerHTML="Aqui tocaria sortir " + especies.records.length + especies.records[0].nom;
+    });
+  });
+});
+
+function volta() {
+    anotaPuntuacio();
+    aleatoris=llistaAleatoris();
+    //console.log("Llista aleatoris: " + aleatoris);
+    posaFoto();
+    posaBotons();  
+}
+
+function anotaPuntuacio(){
+    document.getElementById("puntuacio").innerHTML="Puntuació : " + punts;
+    //versio 2: 
+}
+
+function posaNom(){
+    //triam el numero que serà el correcte.
+    correcte = Math.floor((Math.random() * nombre) + 1) - 1;
+    let n= aleatoris[correcte] - 1;
+    document.getElementById("r").innerHTML="Puntuació : " + punts;
+    document.getElementById("nom").innerHTML=especies.records[n].nom;
+}
+
+function posaFoto(){
+    //triam el numero que serà el correcte.
+    correcte = Math.floor((Math.random() * nombre));
+    //console.log("PosaFoto()correcte:" + correcte);
+    let n= aleatoris[correcte] +1 ;
+    //console.log("PosaFoto()n:" + n);
+    document.getElementById("img1").src="http://aula.gimnesia.net/fotos/PM-1481-1998/" + n + ".jpg";
+}
+
+function posaBotons(){
+  let i=0;
+  let tipuscombinat=false;
+  if(tipusJoc==3){tipuscombinat=true; tipusJoc=Math.floor((Math.random() * 3));}
+  for(let i =0;i<nombre;i++){
+    if(tipusJoc==0){document.getElementById("boto" + i).innerHTML=especies.records[aleatoris[i]].nom;} 
+    if(tipusJoc==1){document.getElementById("boto" + i).innerHTML=especies.records[aleatoris[i]].cientific;} 
+    if(tipusJoc==2){document.getElementById("boto" + i).innerHTML=especies.records[aleatoris[i]].info;} 
+  }
+  if(tipuscombinat){tipusJoc=3;}
+ 
+}
+    
+function pitjat(q){
+    if (correcte==q)
+        {punts++;
+            if(punts>14){
+                
+                alert("has puntuat més de cinc");}
+            } 
+        else 
+        {punts--;}
+    volta();
+}
+
+function llistaAleatoris(){
+  let llista=[];
+  let n=0;
+  while (llista.length<nombre){
+    //generam el nombre
+    n = Math.floor((Math.random() * maxim) + 1);
+    //comprovam que no és dins la llista
+    if (llista.indexOf(n)==-1){llista.push(n);} 
+  }
+  return llista;  
+}
+
+function agafaEspecies(){
+
+}
+
+function creaPartida(){
+    $.post("http://www.gimnesia.net/api/partida/create.php",
+        {
+            nom: "Donald Duck",
+            email: "Duckburg"
+        },
+        function(data, status){
+            console.log("Data: " + data + "\nStatus: " + status);
+  });    
+
+}
+
+function mostrarResultats(){
+    $.get("http://www.gimnesia.net/api/partida/read.php", function(data, status){
+      console.log("Data: " + data + "\nStatus: " + status);
+    });
+
+}
+
+</script>
+</html>

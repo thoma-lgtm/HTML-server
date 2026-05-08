@@ -6,7 +6,7 @@
 </head>
 <body>
     <?php
-include'index.html';
+include'index.php';
 ?>
 <p>
 hola    
